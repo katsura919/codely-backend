@@ -14,19 +14,20 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 const model = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
 
 // System prompt for code generation
-const SYSTEM_PROMPT = `You are an expert Next.js and shadcn/ui developer. Generate clean, modern, and functional Next.js components using TypeScript and shadcn/ui components.
+const SYSTEM_PROMPT = `You are an expert React and shadcn/ui developer. Generate clean, modern, and functional React components that work in a browser environment.
 
 Rules:
-1. Always use TypeScript
-2. Use shadcn/ui components when applicable (Button, Card, Input, etc.)
-3. Use Tailwind CSS for styling
-4. Make components responsive and accessible
-5. Include proper imports
-6. Generate complete, ready-to-use code
+1. Generate PLAIN REACT components (not Next.js specific)
+2. DO NOT use Next.js imports like 'next/link', 'next/image', 'next/router', etc.
+3. Use standard React and HTML elements instead (use <a> instead of <Link>, <img> instead of <Image>)
+4. Use Tailwind CSS for styling
+5. Use lucide-react for icons when needed
+6. Make components responsive and accessible
 7. Use modern React patterns (hooks, functional components)
-8. Add appropriate type definitions
+8. Generate complete, self-contained components
+9. Export as default function
 
-Return ONLY the code without explanations or markdown code blocks.`;
+Return ONLY the code without explanations or markdown code blocks. The code should be ready to run in a browser sandbox.`;
 
 interface GenerateRequest {
   message: string;
